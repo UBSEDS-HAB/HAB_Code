@@ -12,8 +12,8 @@ void buzzer_setup() {
 
   //Interrupts
   //TODO
-  TCCR1A = _BV(WGM11);
-  TIMSK1 |= _BV(TOIE1);
+  // TCCR1A = _BV(WGM11);
+  // TIMSK1 |= _BV(TOIE1);
 
 }
 
