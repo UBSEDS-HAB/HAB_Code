@@ -1,4 +1,3 @@
-#include <SPI.h>
 #include <SD.h>
 #include <Wire.h>
 #include <SPI.h>
@@ -17,10 +16,7 @@ void setup() {
   pinMode(BUZZER_PIN, OUTPUT);
 
   //Debugging only
-  Serial.begin(9600);
-  while (!Serial) {
-    ;
-  }
+  Serial.begin(BAUD_RATE);
 
   if (!bme.begin()) {
     Serial.println("Could not find a valid BMP280 sensor, check wiring!");
@@ -29,13 +25,13 @@ void setup() {
   }
 
   if (!SD.begin(CS_SD)) {
-    Serial.println("initialization failed!");
+    Serial.println("SD Initialization failed!");
     digitalWrite(LED_PIN, HIGH);
     while (1);
   }
 
   buzz_on = 0;
-  Serial.println("initialization done.");
+  Serial.println("Initialization done.");
 }
 
 void loop() {
@@ -48,12 +44,12 @@ void loop() {
     myFile.print(", ");
     myFile.println(bme.readAltitude(SEA_LEVEL_PRESSURE)); // this should be adjusted to your local forcast
     myFile.close();
-    Serial.println("done.");
+    Serial.println("Done.");
   } else {
-    Serial.println("error opening test.txt");
-    // LED ON
+    Serial.println("Error opening log.txt");
   }
-  if(bme.readAltitude(SEA_LEVEL_PRESSURE) < BUZZER_CUTOFF) {
+
+  if(bme.readAltitude(SEA_LEVEL_PRESSURE < BUZZER_CUTOFF) {
     if(buzz_on)
       tone(BUZZER_PIN, BUZZER_FREQ);
     buzz_on = ~buzz_on;

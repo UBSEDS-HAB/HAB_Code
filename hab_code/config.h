@@ -6,8 +6,8 @@
 
 // Buzzer rings below the defined altitude, BUZZ_CUTOFF (meters)
 // Passive buzzer is used, and BUZZER_FREQ tone is sent on BUZZER_PIN
-#define BUZZER_CUTOFF 1000.0
 #define BUZZER_PIN 9
+#define BUZZER_CUTOFF 1000.0
 #define BUZZER_FREQ 1000
 
 // BAUD RATE for serial
