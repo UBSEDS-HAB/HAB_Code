@@ -49,7 +49,7 @@ void loop() {
     Serial.println("Error opening log.txt");
   }
 
-  if(bme.readAltitude(SEA_LEVEL_PRESSURE < BUZZER_CUTOFF) {
+  if(bme.readAltitude(SEA_LEVEL_PRESSURE < BUZZER_CUTOFF)){
     if(buzz_on)
       tone(BUZZER_PIN, BUZZER_FREQ);
     buzz_on = ~buzz_on;

@@ -24,7 +24,7 @@
 #define CS_SD 10
 
 // BMP PINS
-// SDA
-// SCK
+// SDI to SDA
+// SCK TO SCL
 
 #endif
