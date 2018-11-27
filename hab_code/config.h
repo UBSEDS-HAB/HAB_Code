@@ -18,6 +18,13 @@
 #define SEA_LEVEL_PRESSURE 1027.0
 
 // Data pin for SD Card
+// CLK 13
+// SDO 12
+// DI 11
 #define CS_SD 10
+
+// BMP PINS
+// SDA
+// SCK
 
 #endif
