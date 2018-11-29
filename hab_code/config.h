@@ -27,4 +27,10 @@
 // SDI to SDA
 // SCK TO SCL
 
+// Voltage divider resister values (R1 and R2) and analogue
+// input pin to be read from
+#define R1 1000
+#define R2 1000000
+#define voltagePin A1
+
 #endif
