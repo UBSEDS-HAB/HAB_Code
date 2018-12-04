@@ -4,6 +4,7 @@
 #include <Adafruit_BMP280.h>
 #include "config.h"
 #include "buzzer.h"
+#include "power_save.h"
 #include <avr/sleep.h>
 #include <avr/wdt.h>
 
@@ -75,41 +76,6 @@ void loop() {
     buzz_on = ~buzz_on;
   }
 
-  power_manage();
+  power_down();
   
-}
-
-/*
-Disables all unnecesary I/O, sleeps for predetermined
-time and enables all I/O again
-*/
-void power_manage() {
-  // disable ADC
-  byte old_ADCSRA = ADCSRA;
-  ADCSRA = 0;  
-
-  // clear MCU register 
-  MCUSR = 0;   
-
-  // set watchdog timer control register
-  WDTCSR = bit (WDCE) | bit (WDE); // enable change and system reset
-  WDTCSR = bit (WDIE) | bit (WDP2) | bit (WDP1) | bit (WDP0); // enable interrupt and set time
-  wdt_reset();
-  
-  set_sleep_mode (SLEEP_MODE_PWR_DOWN);  
-  noInterrupts ();
-  sleep_enable();
- 
-  // disable brown-out detector
-  MCUCR = bit (BODS) | bit (BODSE);
-  MCUCR = bit (BODS); 
-
-  // enable interrupts and sleep
-  interrupts ();
-  sleep_cpu ();  
-  
-  // interrupt wakes up arduino here
-  sleep_disable();
-  // re-enable ADC conversion
-  ADCSRA = old_ADCSRA;   
 }
